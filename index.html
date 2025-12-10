@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="todo-heading">Your To Do</h1>
+        <form id="todo-form" method="post">
+            <input type="text" placeholder="Add new task" name="add-todo" id="add-todo" required />
+            <button type="submit" id="save-todo">+</button>
+        </form>
+        <div id="todo-container">
+            <div id="remaining-todos">Your remaining todos: <span id="todo-length">0</span></div>
+            <div class="quote">"Doing what you love is the cornerstone of having abundance in your life." - Wayner Dyer</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
