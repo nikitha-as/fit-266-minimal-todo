@@ -14,6 +14,17 @@
             <button type="submit" id="save-todo">+</button>
         </form>
         <div id="todo-container">
+            <div id="t-container">
+                <div id="sort-dropdown">
+                    <p id="sort-heading">Sort by</p>
+                    <ul class="sort-list hidden">
+                        <li id="date-asc" class="sort-list-item">Date added (asc)</li>
+                        <li id="date-desc" class="sort-list-item">Date added (desc)</li>
+                        <li id="title-az" class="sort-list-item">Title a-z</li>
+                        <li id="title-za" class="sort-list-item">Title z-a</li>
+                    </ul>
+                </div>
+            </div>
             <div id="remaining-todos">Your remaining todos: <span id="todo-length">0</span></div>
             <div class="quote">"Doing what you love is the cornerstone of having abundance in your life." - Wayner Dyer</div>
         </div>

@@ -2,6 +2,13 @@ const todoForm = document.getElementById("todo-form");
 const todoContainer = document.getElementById("todo-container");
 const todosLength = document.getElementById("todo-length");
 const remainingTodos = document.getElementById("remaining-todos");
+const tContainer = document.getElementById("t-container");
+const sortDropdown = document.getElementById("sort-dropdown");
+const sortList = document.querySelector(".sort-list");
+const dateAsc = document.getElementById("date-asc");
+const dateDesc = document.getElementById("date-desc");
+const titleAZ = document.getElementById("title-az");
+const titleZA = document.getElementById("title-za");
 
 let todoList = document.createElement("ul");
 todoList.classList.add("todo-list");
@@ -15,7 +22,8 @@ todoForm.addEventListener("submit", function (event) {
     let todoValue = document.getElementById("add-todo").value;
     todoCount = todoCount + 1;
 
-    let todoId = `todo-${Date.now()}`;
+    let uid = Date.now();
+    let todoId = `todo-${uid}`;
 
     todoItem = document.createElement("li");
     todoItem.classList.add("todo-item");
@@ -27,7 +35,7 @@ todoForm.addEventListener("submit", function (event) {
     let todoStatusValue = false;
     const todoStatus = document.createElement("input");
     todoStatus.type = "checkbox";
-    todoStatus.id = `todo-status-${Date.now()}`;
+    todoStatus.id = `todo-status-${uid}`;
     todoStatus.classList.add("todo-status");
     todoStatus.name = "todo-status";
     todoStatus.checked = todoStatusValue;
@@ -93,12 +101,12 @@ todoForm.addEventListener("submit", function (event) {
     });
 
     todoList.appendChild(todoItem);
-    todoContainer.appendChild(todoList);
+    tContainer.appendChild(todoList);
 
     todos.push({
       title: todoTitle.textContent,
       id: todoId,
-      createdAt: Date.now(),
+      createdAt: uid,
     });
 
     document.getElementById("add-todo").value = "";
@@ -117,5 +125,49 @@ function displayTodoSize() {
 
   if (todoCount > 0) {
     remainingTodos.style.display = "block";
+    sortDropdown.style.display = "block";
   }
 }
+
+sortDropdown.addEventListener("click", function () {
+  sortList.classList.toggle("hidden");
+});
+
+function updatedTodos() {
+  todos.forEach((todo) => {
+    const existingItem = document.getElementById(todo.id);
+    if (existingItem) {
+      todoList.appendChild(existingItem);
+    }
+  });
+}
+
+dateAsc.addEventListener("click", function (e) {
+  e.preventDefault();
+  todos.sort((a, b) => a.createdAt - b.createdAt);
+  updatedTodos();
+});
+
+dateDesc.addEventListener("click", function (e) {
+  e.preventDefault();
+  todos.sort((a, b) => {
+    return b.createdAt - a.createdAt;
+  });
+  updatedTodos();
+});
+
+titleAZ.addEventListener("click", function (e) {
+  e.preventDefault();
+  todos.sort((a, b) =>
+    a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+  );
+  updatedTodos();
+});
+
+titleZA.addEventListener("click", function (e) {
+  e.preventDefault();
+  todos.sort((a, b) =>
+    b.title.toLowerCase().localeCompare(a.title.toLowerCase())
+  );
+  updatedTodos();
+});
